@@ -30,10 +30,11 @@ byte sample [3500];
 #endif
 
 
-byte LED = 11;
+byte LED = 13;
 void setup() {
   pinMode(LED, OUTPUT);
   Serial1.begin(250000);
+  Serial.begin(9600);
   pinMode(interruptPin, INPUT);
   attachInterrupt(interruptPin, takeSample, RISING);
 }
@@ -52,7 +53,11 @@ void takeSample(){
 
 void loop() {
   // put your main code here, to run repeatedly:
-  
+  digitalWrite(LED, HIGH);
+  Serial1.println("hello from over here");
+  delay(1000);
+  digitalWrite(LED, LOW);
+  delay(1000);
 }
 
 void serialEvent(){
