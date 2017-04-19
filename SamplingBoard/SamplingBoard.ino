@@ -53,14 +53,18 @@ void takeSample(){
 
 void loop() {
   // put your main code here, to run repeatedly:
+
+  /*
   digitalWrite(LED, HIGH);
   Serial1.println("hello from over here");
   delay(1000);
   digitalWrite(LED, LOW);
   delay(1000);
+  */
+  
 }
 
-void serialEvent(){
+void serialEvent1(){
   while(Serial1.available() > 0){
     String addressCmd = Serial1.readStringUntil('\n');
     Serial1.print("Address read: ");
@@ -69,7 +73,8 @@ void serialEvent(){
       Serial1.println("Thats my address!");
     }else if(addressCmd.equals(myAddress + "givedata")){
       for(int i = 0; i<sizeof(sample); i++){
-        Serial1.println(sample[i]); 
+        String data = "" + sample[i];
+        Serial1.println("Im here"); 
       }
   }
 }
