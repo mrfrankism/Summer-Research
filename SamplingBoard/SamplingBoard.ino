@@ -70,7 +70,7 @@ void serialEvent1(){
     Serial1.print("Address read: ");
     Serial1.println(addressCmd);
     if(addressCmd.equals(myAddress)){
-      Serial1.println("Thats my address!");
+      Serial1.println("Thats my address! : from Hello");
     }else if(addressCmd.equals(myAddress + "givedata")){
       for(int i = 0; i<sizeof(sample); i++){
         String data = "" + sample[i];
