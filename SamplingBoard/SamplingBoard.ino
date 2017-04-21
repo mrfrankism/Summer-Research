@@ -12,6 +12,7 @@ byte analogReadPin = 0;
 byte sample [3500]; 
 
 
+
   
 
 #if (board == 'A') //only used to set the Arduino UNO's ADC to a higher speed
@@ -31,9 +32,12 @@ byte sample [3500];
 
 
 byte LED = 13;
+#define HWSerial Serial1
+#define HWSerial2 Serial2
 void setup() {
   pinMode(LED, OUTPUT);
-  Serial1.begin(250000);
+  HWSerial.begin(250000);
+  HWSerial2.begin(250000);
   Serial.begin(9600);
   pinMode(interruptPin, INPUT);
   attachInterrupt(interruptPin, takeSample, RISING);
@@ -41,12 +45,12 @@ void setup() {
 
 void takeSample(){
 
-  digitalWrite(LED, HIGH);
-  delay(1000);
+  //digitalWrite(LED, HIGH);
+  //delay(1000);
   for(int i = 0; i < sizeof(sample); i++){
-    sample[i] = analogRead(analogReadPin);
+    sample[i] = analogRead(analogReadPin)/4;
   }
-  digitalWrite(LED,LOW);
+  //digitalWrite(LED,LOW);
 
 }
 
@@ -65,16 +69,16 @@ void loop() {
 }
 
 void serialEvent1(){
-  while(Serial1.available() > 0){
-    String addressCmd = Serial1.readStringUntil('\n');
-    Serial1.print("Address read: ");
-    Serial1.println(addressCmd);
+  while(HWSerial.available() > 0){
+    String addressCmd = HWSerial.readStringUntil('\n');
+    HWSerial2.print("Address read: ");
+    HWSerial2.println(addressCmd);
     if(addressCmd.equals(myAddress)){
-      Serial1.println("Thats my address! : from Hello");
+      HWSerial2.println("Thats my address! : from Hello");
     }else if(addressCmd.equals(myAddress + "givedata")){
       for(int i = 0; i<sizeof(sample); i++){
-        String data = "" + sample[i];
-        Serial1.println("Im here"); 
+        //String data = "" + sample[i];
+        HWSerial2.println(sample[i]); 
       }
   }
 }

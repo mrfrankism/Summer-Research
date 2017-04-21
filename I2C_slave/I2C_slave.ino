@@ -1,12 +1,15 @@
 #include <Wire.h>
-byte sample[3500];
+byte sample[31];
 
-#define sensorPin 16
+#define LED 13
+#define analogPin A3
 #define interruptPin 8
-#define myAddress 10
+#define myAddress 0x26
 
 void setup() {
   // put your setup code here, to run once:
+pinMode(LED, OUTPUT);
+  
 Wire.begin(myAddress);
 Wire.onRequest(send_Data);
 pinMode(interruptPin, INPUT);
@@ -19,12 +22,23 @@ void loop() {
 }
 
 void send_Data(){
-Wire.write(sample, sizeof(sample));
+//for(int b =0; b<sizeof(sample)/32; i++){
+  //Wire.write(sample, sizeof(sample)/32);
+//}
+     
+   Wire.write(sample,31);
 }
 
 void takeSample(){
-  for(int i =0; i < sizeof(samples); i++){
-    sample[i] = analogRead(sensorPin);
+  digitalWrite(LED, HIGH);
+  unsigned long startTime = micros();
+  for(int i =0; i < 30; i++){
+    sample[i] = analogRead(analogPin)/4;
+   //sample[i] = 100/4;
   }
+  unsigned long stopTime = micros();
+  sample[30] = (stopTime-startTime)/4; //store the amount of time to take 30 samples
+  //delay(1000);
+  digitalWrite(LED, LOW);
 }
 
