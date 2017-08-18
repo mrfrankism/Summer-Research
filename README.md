@@ -13,4 +13,12 @@ and antenna to properly measure the E-field. Those designs are in the eagle fold
 
 
 
+## Simple Antenna Design to Shield From B-Field and Capture E-Field
+
+* Antenna V1
+![](https://user-images.githubusercontent.com/13021723/29471202-1a1762be-841d-11e7-8570-d0ea560009bd.PNG)
+* Antenna V2
+![](https://user-images.githubusercontent.com/13021723/29471201-1a147630-841d-11e7-95af-ecca78310b9c.PNG)
+
+
 
