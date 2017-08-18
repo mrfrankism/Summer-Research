@@ -9,6 +9,7 @@ and antenna to properly measure the E-field. Those designs are in the eagle fold
 
 
 ## Configuration to Synchronize and Sample using 16 Teensy Boards
+![](https://user-images.githubusercontent.com/13021723/29470858-ff85390e-841b-11e7-89cc-80fd2874df0f.png)
 
 
 
